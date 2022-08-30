@@ -5,6 +5,8 @@
   <p>{{counter}}</p>
   <p>{{number}}</p>
   <p v-text="msg"></p>
+  <div @click="handleClick">点我</div>
+  <input v-model="msg" />
 </div>
 <script src="./v.js"></script>
 <script>
@@ -13,10 +15,16 @@
     data: {
       counter: 1,
       number: 13,
-      msg: 'Hello World'
+      msg: 'Hello World',
+
+    },
+    methods: {
+      handleClick() {
+        console.log('救命！这里有个老实人')
+      }
     }
   })
-  setInterval(() => {
-    app.counter++
-  }, 1000);
+  // setInterval(() => {
+  //   app.counter++
+  // }, 1000);
 </script>

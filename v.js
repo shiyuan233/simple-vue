@@ -11,7 +11,6 @@ class V {
   }
 }
 
-
 class Observer {
   constructor(vm, data) {
     this.vm = vm
@@ -65,7 +64,21 @@ class Compiler {
             const exp = attr.value
             if (attrName.startsWith('v-')) {
               const dir = attrName.slice(2)
-              this.updater(node, dir, exp)
+              // v-model 实现
+              if (dir === 'model') {
+                node.setAttribute('value', this.$vm[exp])
+                node.addEventListener('input', (e) => {
+                  this.$vm[exp] = e.target.value
+                })
+              } else {
+                this.updater(node, dir, exp)
+              }
+            }
+            // 实现事件绑定
+            if (attrName.startsWith('@')) {
+              const dir = attrName.slice(1)
+              const methods = this.$vm.$options.methods
+              node.addEventListener(dir, methods[exp])
             }
           })
           if (node.childNodes) {
@@ -98,7 +111,7 @@ class Compiler {
   }
 }
 
-// 页面上每展示一个属性 就得有一个watcher  标配小秘书 用一次就一个  
+// 页面上每展示一个属性 就得有一个watcher  标配小秘书 用一次就一个
 // 观察者类
 class Watcher {
   constructor(vm, key, updateFn) {

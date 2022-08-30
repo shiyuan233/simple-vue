@@ -22,3 +22,6 @@
 
       而且dep在observ中是不会销毁的 闭包 所以能实现保留之前的watcher 相同的一个属性 进入同一个dep
 
+#### todo 
+实现事件监听处理（@xxx形式即可）done
+双绑（v-model）done
