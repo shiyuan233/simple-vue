@@ -3,13 +3,17 @@
   <p>{{counter}}</p>
   <p>{{counter}}</p>
   <p>{{counter}}</p>
+  <p>{{number}}</p>
+  <p v-text="msg"></p>
 </div>
 <script src="./v.js"></script>
 <script>
   let app = new V({
-    el: 'app',
+    el: '#app',
     data: {
-      counter: 1
+      counter: 1,
+      number: 13,
+      msg: 'Hello World'
     }
   })
   setInterval(() => {
